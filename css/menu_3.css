@@ -590,7 +590,7 @@ header .especial ion-icon{
   bottom: 0;
   background-color: var(--btn);
   min-height: 40%;
-  width: 100%
+  width: 100vw;
   padding:1em 0.4em;
   gap:1em;
   transform: translateY(100%);
