@@ -1,4 +1,4 @@
-//Alergenos de productos
+//Alergenos de productos induviudales: la funcion se llama en el script producots.js
 function setAllergens(elements,id){
     let card = document.querySelector(id);
     let allergens = document.createElement('div');
@@ -64,4 +64,89 @@ producto_12[0] = ['alergenos/camaron.png'];
 producto_12[1] = ['alergenos/camaron.png'];
 
 
+//************************************************************************************************************************************************
+//Creacion de todos los allergenos
+const allergens = [
+  {
+    "nombre":"Camaron",
+    "url":"alergenos/camaron.png"
+  },
+  {
+    "nombre":"Cangrejo",
+    "url":"alergenos/cangrejo.png"
+  },
+  {
+    "nombre":"Chorizo",
+    "url":"alergenos/chorizo.png"
+  },
+  {
+    "nombre":"Hongo",
+    "url":"alergenos/hongo.png"
+  },
+  {
+    "nombre":"Huevo",
+    "url":"alergenos/leche.png"
+  },
+  {
+    "nombre":"Mani",
+    "url":"alergenos/mani.png"
+  },
+  {
+    "nombre":"Molusco",
+    "url":"alergenos/molusco.png"
+  },
+  {
+    "nombre":"Mostaza",
+    "url":"alergenos/mostaza.png"
+  },
+  {
+    "nombre":"Nuez",
+    "url":"alergenos/nuez.png"
+  },
+  {
+    "nombre":"Pescado",
+    "url":"alergenos/pez.png"
+  },
+  {
+    "nombre":"Pimienta",
+    "url":"alergenos/pimienta.png"
+  },
+  {
+    "nombre":"Pulpo",
+    "url":"alergenos/pulpo.png"
+  },
+  {
+    "nombre":"Sal",
+    "url":"alergenos/sal.png"
+  },
+  {
+    "nombre":"Sesamo",
+    "url":"alergenos/sesamo.png"
+  },
+  {
+    "nombre":"SO2",
+    "url":"alergenos/SO.png"
+  },
+  {
+    "nombre":"Soya",
+    "url":"alergenos/soya.png"
+  },
+  {
+    "nombre":"Trigo",
+    "url":"alergenos/trigo.png"
+  }
+]
+const createAllergens = () =>{
+  const allergensContent = document.querySelector(".allergens-content");
+  allergens.forEach((allergen) => {
+    let box = document.createElement("div");
+    box.className = "box";
+    box.innerHTML = `
+    <img class="allergens" src="${allergen.url}" alt="allergens-img">
+    <p class="allergens-name">${allergen.nombre}</p>
+    `
+    allergensContent.append(box);
+  });
+}
 
+createAllergens();

@@ -16,7 +16,7 @@ const productos = [
     {
         "id":2,
         "nombre":"Pinchos de tortilla de patatas",
-        "precio":2.80,
+        "precio":2,
         "img":"image/aperitivo_2.jpg",
         "desc":"lorem impis desc lestro le as  adas derll lorem",
         "cantidad":1
@@ -40,7 +40,7 @@ const productos = [
     {
         "id":5,
         "nombre":"Naranja",
-        "precio":4.34,
+        "precio":4,
         "img":"image/jugo_2.jpg",
         "desc":"lorem impis desc lestro le as  adas derll lorem",
         "cantidad":1
@@ -56,7 +56,7 @@ const productos = [
     {
         "id":7,
         "nombre":"Pizza de chorizo",
-        "precio":10.15,
+        "precio":10,
         "img":"image/pizza_1.jpg",
         "desc":"lorem impis desc lestro le as  adas derll lorem",
         "cantidad":1
@@ -96,7 +96,7 @@ const productos = [
     {
         "id":12,
         "nombre":"Tiramisú",
-        "precio":4.30,
+        "precio":4.90,
         "img":"image/cake_3.jpg",
         "desc":"lorem impis desc lestro le as  adas derll lorem",
         "cantidad":1
@@ -143,10 +143,6 @@ productos.forEach((product)=>{
 
     shop.append(card);
 })
-
-
-//set localstorgae items
-
 
 
 

@@ -18,6 +18,11 @@
     --bg:rgb(12, 12, 12);
 }
 
+::placeholder {
+  font-family: 'Poiret One', cursive;
+  font-weight: 800;
+}
+
 html{
     scroll-behavior: smooth;
     overflow-x: hidden;
@@ -282,6 +287,14 @@ header .especial ion-icon{
     padding:0.2em;
 }
 
+.shop .category-selector{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 /*Modal*/
 .modal-container{
     background-color:var(--card);
@@ -375,7 +388,7 @@ header .especial ion-icon{
 
 .total-content{
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -408,6 +421,12 @@ header .especial ion-icon{
   gap:5px;
   font-weight: 600;
   border-radius: 10px;
+  cursor: pointer;
+  transition: 200ms all;
+}
+
+.btn-pedido:hover{
+  box-shadow: 2px 2px 10px var(--btn);
 }
 
 .cart-hidden{
@@ -440,4 +459,168 @@ header .especial ion-icon{
   padding: 3px;
   border-radius: 50%;
   display: none;
+}
+
+/*Formulario de nuermo de mesa*/
+.form {
+  min-height: 100vh;
+  padding: 1em 1.3em;
+  background-color: rgba(0,0,0,.8);
+  backdrop-filter:blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap:10px;
+  width: 100%;
+  position: fixed;
+  top:0;
+  z-index: 10000;
+}
+
+.form img {
+  width: 200px;
+}
+
+.form .title {
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.form .subtitle {
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+  margin: 20px 0 0 0;
+}
+
+.form .input-number {
+  font-size:20px;
+  width: min-content;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 30px;
+  margin: 20px 0 0 0;
+  outline: none;
+  border: none;
+}
+
+.form .input-number.error--input{
+  border: 2px solid red;
+  color: red;
+}
+
+.form .submit-btn {
+  font-size: 20px;
+  padding: 0.3em 1em;
+  border-radius: 7px;
+  border: none;
+  margin: 20px;
+  background-color: var(--btn);
+  color: #fff;
+  cursor: pointer;
+}
+
+.form .error {
+  color:red;
+  font-size: 23px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:0.4em;
+  display: none;
+}
+
+.form .error.mostrar {
+  display: flex;
+}
+
+/*Contenedor de todos los alergenos*/
+.allergens-title{
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  margin: 30px 0 15px 0;
+}
+.allergens-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding:1em 2em;
+  gap:20px;
+  background-color: var(--card);
+}
+
+@@media (max-width:700px) {
+  .allergens-content {
+    padding:0em 0.4em;
+  }
+}
+
+.allergens-content .box{
+  border: 1px solid #fff;
+  padding: 0.4em;
+}
+
+.allergens-content .allergens{
+  width: 60px;
+}
+
+.allergens-content .allergens-name{
+  font-style: 18px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+/*Cofirmacion de pedido*/
+.cofirm-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  background-color: var(--btn);
+  min-height: 40%;
+  width: 100%
+  padding:1em 0.4em;
+  gap:1em;
+  transform: translateY(100%);
+  transition: 300ms;
+}
+
+.cofirm-content.show {
+  transform: translateY(0);
+}
+
+.cofirm-content ion-icon{
+  font-size: 50px;
+  margin: 10px 0 0 0;
+  color: #fff;
+}
+
+.cofirm-content .cofirm-text{
+  color:#fff;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cofirm-content .btn-close-cofirm{
+  font-size: 24px;
+  margin:10px 0 0 0;
+  padding: 0.2em 0.6em;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  transition: 200ms all;
+  border: none;
+  cursor: pointer;
 }

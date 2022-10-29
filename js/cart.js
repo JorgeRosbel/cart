@@ -2,6 +2,25 @@ const incrementar =  document.getElementById("add-count");
 const remover =  document.getElementById("remove-count");
 let pedido = [];
 
+const input = document.querySelector(".input-number");
+const errorMessage = document.querySelector(".error");
+const form = document.querySelector(".form");
+const sendBtn = document.querySelector(".submit-btn");
+sendBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  var number_value = document.querySelector(".input-number").value;
+  if(number_value == '' || number_value<0 || number_value == 0 || number_value[0] == 0 || number_value % 1 != 0) {
+    input.classList.add("error--input");
+    errorMessage.classList.add("mostrar");
+  }
+  else{
+    input.classList.remove("error--input");
+    errorMessage.classList.remove("mostrar");
+    form.style.display = "none";
+    localStorage.setItem("number_value", JSON.stringify(number_value));
+  }
+});
+
 const createCart = ()=> {
   modalContainer.classList.remove("cart-hidden");
   modalContainer.innerHTML = "";
@@ -48,25 +67,37 @@ const createCart = ()=> {
 
   //Logica para enviar el pedido por Wahatsapp
   //Contenedor del pedido
+  let message = [];
   const enviarPedido = document.createElement("a");
-  enviarPedido.innerHTML = `<buttom class="btn-pedido">Enviar<ion-icon name="logo-whatsapp"></ion-icon></buttom>`;
+  enviarPedido.innerHTML = `<buttom class="btn-pedido"><ion-icon name="checkmark-circle"></ion-icon>Completar<ion-icon name="checkmark-circle"></ion-icon></buttom>`;
   const sendBtn = document.querySelector(".btn-pedido");
+
   enviarPedido.addEventListener("click", () => {
     cart.forEach((product) => {
-      let nombreProducto = 'Nombre: ' + product.nombre + '\n';
-      let unidades = 'Cantidad: ' + product.cantidad + '\n';
-      let precioPorcantidad = 'Precio: '+ (product.cantidad * product.precio)  + ' euros' + '\n';
-      pedido.push(nombreProducto,unidades,precioPorcantidad);
+      let nombreProducto = product.nombre;
+      let unidades =  'x' + product.cantidad;
+      let precioPorcantidad = ': ' + (product.cantidad * product.precio) + '€';
+      pedido = nombreProducto+ '  ' + unidades+ '  ' + precioPorcantidad;
+      message = message +'%0A'+ pedido;
+      console.log(message);
     });
-    var address = 'https://api.whatsapp.com/send?phone=5358893628&text=PEDIDO%20MARYS%20CAFE%0A'+ pedido + 'Total a pagar: ' + '%0At' + total;
-    enviarPedido.setAttribute("href",address);
+
+
+    var mesa = localStorage.getItem("number_value");
+    var token = "5698810751:AAHgHB_dnM9HLNIzHWzhcj3IijFDbDqg3YM";
+    var chat_id = -797402909;
+    var address = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=PEDIDO%20DE%20MARYS%20CAFE%0A%0APara%20Mesa:%20${mesa}%0A${message}%0A%0ATotal a pagar:%20${total}%20€`;
+    let api = new XMLHttpRequest();
+    api.open("GET", address, true);
+    api.send();
+
+    $(".cofirm-content").addClass("show");
+    $(".modal-container").addClass("cart-hidden");
+
   })
 
+
   totalBuying.append(enviarPedido);
-
-
-
-
 
 
   //Ocular verCarrito
@@ -96,14 +127,3 @@ const cartCounter = () => {
   cantCarrito.style.display = "block";
   cantCarrito.innerHTML = cart.length;
 }
-
-
-const enviarPedido =  () => {
-  cart.forEach((product) => {
-    let nombreProducto = 'Nombre: ' + product.nombre + '\n';
-    let unidades = 'Cantidad: ' + product.cantidad + '\n';
-    let precioPorcantidad = 'Precio'+ (product.cantidad * product.precio)  + ' euros' + '\n';
-    pedido.push(nombreProducto,unidades,precioPorcantidad);
-  });
-  return pedido;
-};

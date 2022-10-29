@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/fb1c874a89.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <link rel="stylesheet" href="./css/menu_3.css">
+    <link rel="stylesheet" href="./css/menu_3.css?1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
@@ -33,14 +33,54 @@
             <p class="category-name lang category-4" key="cat-4">Cake</p>
         </div>
 
-        <div class="shop"></div>
+        <div class="shop">
+          <div class="category--1 category-selector"></div>
+          <div class="category--2 category-selector"></div>
+          <div class="category--3 category-selector"></div>
+          <div class="category--4 category-selector"></div>
+        </div>
         <div id="modal-container" class="modal-container cart-hidden"></div>
+
+        <form class="form">
+          <img src="./image/icon.png" alt="icon">
+          <p class="title">Bienvenido a Marys's Caffe</p>
+          <p class="subtitle">Antes de explorar el menu, por favor ingrese su NUMERO de mesa</p>
+          <input class="input-number" type="number" placeholder="Numero de mesa" required>
+          <p class="error"><ion-icon name="alert-circle"></ion-icon>Ingrese el valor correcto<ion-icon name="alert-circle"></ion-icon></p>
+          <input class="submit-btn" type="submit" value="Confirmar">
+        </form>
+
+        <p class="allergens-title">Alergenos</p>
+        <div class="allergens-content"></div>
+
+        <div class="cofirm-content">
+          <ion-icon name="fast-food"></ion-icon>
+          <p class="cofirm-text">Estimado cliente, su pedido ha sido tomado correctamente y
+          podra disfrutralo en poco tiempo</p>
+          <button class="btn-close-cofirm">Aceptar</button>
+        </div>
+
+        <footer>
+          <p class="info-contacto">Contacto</p>
+          <div class="net">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+          </div>
+          <address>
+
+          </address>
+
+        </footer>
+
     </main>
 
     <script src="./js/allergens.js"></script>
-    <script src="./js/app.js"></script>
     <script src="./js/productos.js"></script>
     <script src="./js/cart.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/reveal.js"></script>
+
 
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
