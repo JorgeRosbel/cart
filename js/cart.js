@@ -125,5 +125,6 @@ const eliminarProducto = () => {
 //Cart counter
 const cartCounter = () => {
   cantCarrito.style.display = "block";
-  cantCarrito.innerHTML = cart.length;
+  const itemSelect =cart.reduce((acc, el) => acc + el.cantidad, 0);
+  cantCarrito.innerHTML = itemSelect;
 }
