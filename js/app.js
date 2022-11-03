@@ -14,6 +14,13 @@ $(document).ready(function(){
   })
 })
 
+//Cerrar error de pedido vacio
+$(document).ready(function(){
+  $(".alert-btn").on("click", function(){
+    $(".alert-content").removeClass("visible");
+  })
+})
+
 
 //Categorias active
 function addMarkerCategory(){
@@ -24,6 +31,7 @@ function addMarkerCategory(){
         })
     })
 }
+
 
 addMarkerCategory();
 

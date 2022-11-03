@@ -29,6 +29,16 @@ const createCart = ()=> {
   modalHeader.innerHTML = `<p class="modal-title"><ion-icon name="restaurant"></ion-icon>Su pedido</p>`;
   modalContainer.append(modalHeader);
 
+  const formInfo = document.createElement("form");
+  formInfo.className = "form-info";
+  formInfo.innerHTML = `
+      <form class="fomr-info">
+        <textarea class="input-textarea" placeholder="Haga aclaraciones sobre su pedido (OPCIONAL)"></textarea>
+      </form>`;
+  modalContainer.append(formInfo);
+
+
+
   const modalbutton = document.createElement('buttom');
   modalbutton.className = "modal-btn-close";
   modalbutton.innerHTML = '<ion-icon name="close"></ion-icon>';
@@ -40,7 +50,7 @@ const createCart = ()=> {
       cartContent.innerHTML = `
       <img src="${product.image}" alt="product-Img" class="img-mini">
       <p class="product-name-cart">${product.nombre}</p>
-      <p class="product-amount">x${product.cantidad}</p>
+      <p class="product-amount">por ${product.cantidad}</p>
       <p class="product-price-cart">${product.cantidad * product.precio}<ion-icon name="logo-euro"></ion-icon></p>
       `;
 
@@ -53,7 +63,13 @@ const createCart = ()=> {
 
       eliminar.addEventListener("click", eliminarProducto);
 
+      $(document).ready(function() {
+        $(".sumar").on("click", aumentar);
+      })
+
   });
+
+
 
   const total =cart.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
   const totalBuying = document.createElement('div');
@@ -73,26 +89,48 @@ const createCart = ()=> {
   const sendBtn = document.querySelector(".btn-pedido");
 
   enviarPedido.addEventListener("click", () => {
-    cart.forEach((product) => {
-      let nombreProducto = product.nombre;
-      let unidades =  'x' + product.cantidad;
-      let precioPorcantidad = ': ' + (product.cantidad * product.precio) + '€';
-      pedido = nombreProducto+ '  ' + unidades+ '  ' + precioPorcantidad;
-      message = message +'%0A'+ pedido;
-      console.log(message);
-    });
+    if(cart != ''){
+      cart.forEach((product) => {
+        let nombreProducto = product.nombre;
+        let unidades =  "*x*" + product.cantidad;
+        let precioPorcantidad = ': ' + (product.cantidad * product.precio) + '€';
+        pedido ="\u2705" +' '+ nombreProducto+ '  ' + unidades+ '  ' + precioPorcantidad;
+        message = message +'%0A'+ pedido;
+        console.log(message);
+      });
 
 
-    var mesa = localStorage.getItem("number_value");
-    var token = "5698810751:AAHgHB_dnM9HLNIzHWzhcj3IijFDbDqg3YM";
-    var chat_id = -797402909;
-    var address = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=PEDIDO%20DE%20MARYS%20CAFE%0A%0APara%20Mesa:%20${mesa}%0A${message}%0A%0ATotal a pagar:%20${total}%20€`;
-    let api = new XMLHttpRequest();
-    api.open("GET", address, true);
-    api.send();
+      var textInfo = document.querySelector(".input-textarea").value;
+      console.log(textInfo);
+      if(textInfo != ''){
+        textInfo = "\u26A0" + "*Aclaraciones: *" + "\u26A0" + "%0A" + textInfo;
+      }
+      else{
+        textInfo = "\u26A0" + "*Aclaraciones: *"+ "\u26A0" + "%0ANo%20hay%20aclaraciones%20por%20parte%20del%20cliente";
+      }
 
-    $(".cofirm-content").addClass("show");
-    $(".modal-container").addClass("cart-hidden");
+
+      var now = new Date();
+      now = now.toString();
+      var day = now.slice(4,15);
+      var hour = now.slice(16,24);
+      var time = "\uD83D\uDDD3" + "*Fecha:* " + day + "%0A" + "\u23F0" + "*Hora:* " + hour;
+      var mesa = localStorage.getItem("number_value");
+      var token = "5698810751:AAHgHB_dnM9HLNIzHWzhcj3IijFDbDqg3YM";
+      var chat_id = -797402909;
+      var address = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=\u2757*PEDIDO%20DE%20MARYS%20CAFE*\u2757%0A%0A${time}%0A%0A\uD83D\uDC49\uD83C\uDFFB*Para%20Mesa:*%20${mesa}\uD83D\uDC48\uD83C\uDFFB%0A${message}%0A%0A${textInfo}%0A%0A\uD83E\uDD11*Total a pagar:*%20${total}%20€\uD83E\uDD11&parse_mode=markdown`;
+      let api = new XMLHttpRequest();
+      api.open("GET", address, true);
+      api.send();
+
+
+      $(".cofirm-content").addClass("show");
+      $(".modal-container").addClass("cart-hidden");
+      resetCart();
+    }
+    else {
+      $(".alert-content").addClass("visible");
+    }
 
   })
 
@@ -121,6 +159,25 @@ const eliminarProducto = () => {
   cartCounter();
   createCart();
 };
+
+const resetCart = () => {
+  cart = [];
+  cartCounter();
+  return cart;
+  createCart();
+}
+
+//Aumentar productos
+const aumentar = () => {
+  const foundID = cart.find((element) => element.id);
+  foundID.cantidad++;
+
+  console.log(foundID);
+  console.log(foundID.cantidad);
+  cartCounter();
+  createCart();
+}
+
 
 //Cart counter
 const cartCounter = () => {
