@@ -1,7 +1,8 @@
 const incrementar =  document.getElementById("add-count");
 const remover =  document.getElementById("remove-count");
 let pedido = [];
-
+import {token} from "./config.js";
+import {chat_id} from "./config.js";
 const input = document.querySelector(".input-number");
 const errorMessage = document.querySelector(".error");
 const form = document.querySelector(".form");
@@ -50,11 +51,53 @@ const createCart = ()=> {
       cartContent.innerHTML = `
       <img src="${product.image}" alt="product-Img" class="img-mini">
       <p class="product-name-cart">${product.nombre}</p>
-      <p class="product-amount">por ${product.cantidad}</p>
+      <div class="caja">
+        <p class="product-amount">x${product.cantidad}</p>
+      </div>
       <p class="product-price-cart">${product.cantidad * product.precio}<ion-icon name="logo-euro"></ion-icon></p>
       `;
 
       modalContainer.append(cartContent);
+
+      let amountContent = document.createElement("div");
+      amountContent.className = "box-arrow";
+      cartContent.append(amountContent);
+
+
+      let less = document.createElement("span");
+      less.className = "restar";
+      less.innerHTML = `<p class="restar"><ion-icon name="caret-back-circle-outline"></ion-icon></p>`;
+      amountContent.append(less);
+
+      less.addEventListener("click", ()=> {
+        const foundId = cart.find((element) => element.id === product.id)
+        console.log(foundId);
+        if(product.cantidad == 1){
+          product.cantidad == 1;
+        }
+        else {
+          product.cantidad--;
+        }
+        console.log(product.cantidad);
+        cartCounter();
+        createCart();
+      });
+
+
+      let more = document.createElement("span");
+      more.className = "sumar";
+      more.innerHTML = `<p class="sumar"><ion-icon name="caret-forward-circle-outline"></ion-icon></p>`;
+      amountContent.append(more);
+
+
+      more.addEventListener("click", ()=> {
+        const foundId = cart.find((element) => element.id === product.id)
+        console.log(foundId);
+        product.cantidad++;
+        console.log(product.cantidad);
+        cartCounter();
+        createCart();
+      });
 
       let eliminar = document.createElement("buttom");
       eliminar.className = "btn-delete";
@@ -63,13 +106,9 @@ const createCart = ()=> {
 
       eliminar.addEventListener("click", eliminarProducto);
 
-      $(document).ready(function() {
-        $(".sumar").on("click", aumentar);
-      })
+
 
   });
-
-
 
   const total =cart.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
   const totalBuying = document.createElement('div');
@@ -116,8 +155,8 @@ const createCart = ()=> {
       var hour = now.slice(16,24);
       var time = "\uD83D\uDDD3" + "*Fecha:* " + day + "%0A" + "\u23F0" + "*Hora:* " + hour;
       var mesa = localStorage.getItem("number_value");
-      var token = "5698810751:AAHgHB_dnM9HLNIzHWzhcj3IijFDbDqg3YM";
-      var chat_id = -797402909;
+      //var token = "5698810751:AAHgHB_dnM9HLNIzHWzhcj3IijFDbDqg3YM";
+      //var chat_id = -797402909;
       var address = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=\u2757*PEDIDO%20DE%20MARYS%20CAFE*\u2757%0A%0A${time}%0A%0A\uD83D\uDC49\uD83C\uDFFB*Para%20Mesa:*%20${mesa}\uD83D\uDC48\uD83C\uDFFB%0A${message}%0A%0A${textInfo}%0A%0A\uD83E\uDD11*Total a pagar:*%20${total}%20€\uD83E\uDD11&parse_mode=markdown`;
       let api = new XMLHttpRequest();
       api.open("GET", address, true);
@@ -153,6 +192,7 @@ verCarrito.addEventListener("click",createCart);
 //Funcion de eliminar producto por ID
 const eliminarProducto = () => {
   const foundId = cart.find((element) => element.id);
+  console.log(foundId);
   cart = cart.filter((cartId) => {
     return cartId !== foundId;
   });
@@ -169,13 +209,13 @@ const resetCart = () => {
 
 //Aumentar productos
 const aumentar = () => {
-  const foundID = cart.find((element) => element.id);
-  foundID.cantidad++;
-
-  console.log(foundID);
-  console.log(foundID.cantidad);
-  cartCounter();
-  createCart();
+  const foundId = cart.find((element) => element.id === product.id)
+  console.log(foundId);
+  cart.filter((cartId) => {
+    return cartId !== foundId;
+  });
+  //cartCounter();
+  //createCart();
 }
 
 

@@ -345,11 +345,12 @@ header .especial ion-icon{
 
 .modal-container .modal-content{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin:20px 10px;
     border-bottom: solid 2px #fff;
     padding:0 0 1em 0;
+    gap:20px;
 }
 
 .modal-container .modal-content .img-mini{
@@ -376,7 +377,7 @@ header .especial ion-icon{
     display:flex;
     justify-content: center;
     align-items: center;
-    gap:2px;
+    gap:1px;
     letter-spacing: 3px;
 }
 
@@ -782,12 +783,19 @@ footer {
   align-items: center;
   text-align: center;
 }
+.box-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:16px;
+  flex-direction: column;
+  min-width: 40px;
+}
 
-.contador-content .sumar,
-.contador-content .restar{
+.restar,
+.sumar{
   color:#fff;
-  font-size: 20px;
-  margin:0 10px;
+  font-size: 30px;
 }
 
 /*Estilos de form-Ifo para especificar cosas sobre el pedido*/

@@ -4,6 +4,12 @@ const modalContainer = document.getElementById('modal-container');
 const shop = document.querySelector('.shop');
 const cantCarrito = document.getElementById('cantidad-cart');
 
+const cartCounter = () => {
+  cantCarrito.style.display = "block";
+  const itemSelect =cart.reduce((acc, el) => acc + el.cantidad, 0);
+  cantCarrito.innerHTML = itemSelect;
+}
+
 const productos = [
     {
         "id":1,
@@ -140,6 +146,7 @@ productos.forEach((product)=>{
       }
       cartCounter();
     })
+    
 
     shop.append(card);
 })
